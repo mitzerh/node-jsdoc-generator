@@ -2,6 +2,8 @@
 
 Generate documentation for your JS files using [JsDoc](https://www.npmjs.com/package/jsdoc), and using [docDash template](https://www.npmjs.com/package/docdash).
 
+See sample usage at: **[https://github.com/mitzerh/sample-jsdoc-generator](https://github.com/mitzerh/sample-jsdoc-generator)**
+
 ```bash
 npm install --save jsdoc-generator
 ```
@@ -15,16 +17,14 @@ const Generator = require('jsdoc-generator');
 
 const config = {
 	dest: '/path/to/output/folder',
-    paths: [
-    	{
-        	name: 'my-app',
-            source: '/path/of/your-app'
-        },
-        {
-        	name: 'another-app',
-            source: '/path/of/your-other-app'
-        }
-    ]
+    paths: [{
+		name: 'my-app',
+		source: '/path/of/your-app'
+	},
+	{
+		name: 'another-app',
+		source: '/path/of/your-other-app'
+	}]
 };
 
 mydocs = new Generator(config);
