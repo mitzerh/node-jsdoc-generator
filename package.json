@@ -1,0 +1,41 @@
+{
+  "name": "jsdoc-generator",
+  "version": "0.0.1",
+  "description": "Generate jsdoc for your js files",
+  "scripts": {
+    "postinstall": "node ./init.js"
+  },
+  "bin": {
+    "jsdoc-generator": "./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mitzerh/node-jsdoc-generator.git"
+  },
+  "os": [
+    "darwin",
+    "linux"
+  ],
+  "engines": {
+    "node": ">= 4.0.0"
+  },
+  "author": "Helcon Mabesa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mitzerh/node-jsdoc-generator/issues"
+  },
+  "homepage": "https://github.com/mitzerh/node-jsdoc-generator#readme",
+  "dependencies": {
+    "cli-helper": "^0.1.0",
+    "colors": "^1.1.2",
+    "docdash": "^0.4.0",
+    "jsdoc": "^3.4.3",
+    "lodash": "^4.17.4"
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true,
+      "es6": true
+    }
+  }
+}

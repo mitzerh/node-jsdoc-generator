@@ -1,0 +1,12 @@
+nav { padding-bottom: 20px; }
+
+table tbody tr:nth-child(even) {
+    background-color: #eee;
+}
+
+/**
+ * readme files
+ */
+.readme h2 {
+    border-bottom: 1px solid #e3e3e3;
+}

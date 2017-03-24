@@ -1,0 +1,19 @@
+{
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": ["jsdoc"]
+    },
+    "plugins": [
+        "plugins/markdown"
+    ],
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": true,
+        "useLongnameInNav": false
+    },
+    "opts": {
+        "encoding": "utf8",
+        "private": true,
+        "recurse": true
+    }
+}
