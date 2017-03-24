@@ -9,7 +9,7 @@ class Helper extends CLI_Helper {
         super();
     }
 
-    getNodeBin(name, modules) {
+    getNodeBin(name, modulesPath) {
         const type = (this.isPathExists(modulesPath + '/.bin')) ? 'local' : 'global';
         let ret;
         if (type === 'global') {
@@ -17,7 +17,7 @@ class Helper extends CLI_Helper {
         } else {
             ret = '/.bin/' + name;
         }
-        return (modules || '') + ret;
+        return (modulesPath || '') + ret;
     }
 
 }

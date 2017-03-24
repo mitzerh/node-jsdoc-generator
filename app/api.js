@@ -3,6 +3,7 @@
 
 const config = require('app/config');
 const Helper = require('app/helper');
+const _ = require('lodash');
 const log = console.log;
 
 class API {
@@ -20,7 +21,7 @@ class API {
         this._CONF_JSON = JSON.parse(Helper.readFile(config.dir.app + '/jsdoc.json'));
 
         // custom layout
-        _.merge(json, {
+        _.merge(this._CONF_JSON, {
             templates: {
                 'default': {
                     layoutFile: this._LAYOUT_PATH + '/layout.tmpl'
@@ -31,12 +32,11 @@ class API {
         // write
         this._CONFIG_FILE = this._DEST_PATH + '/conf.json';
         Helper.createDir(this._DEST_PATH);
-        Helper.writeFile(configFile, JSON.stringify(json));
+        Helper.writeFile(this._CONFIG_FILE, JSON.stringify(this._CONF_JSON));
 
     }
 
-    generate() {
-
+    generate(callback) {
         /*
         [{
             name: 'my.app',
@@ -45,24 +45,24 @@ class API {
          */
         const self = this;
         const configFile = this._CONFIG_FILE;
+        const destPath = this._DEST_PATH;
         const layoutPath = this._LAYOUT_PATH;
-        const destFolder = this._DOC_PATHS;
         const modulesPath = config.dir.base + '/node_modules';
         const jsdocExec = Helper.getNodeBin('jsdoc', modulesPath);
 
         this._DOC_PATHS.forEach(function(info){
             const sourcePath = info.source;
-            const destPath = destFolder + '/' + info.name;
+            const outputPath = destPath + '/' + info.name;
 
             // clean dir
             if (Helper.isPathExists(destPath)) {
-                Helper.shellCmd('rm -rf ./' + info.folder, destFolder);
+                Helper.shellCmd('rm -rf ./' + info.folder, outputPath);
             }
 
             let cmd = [
                 `${jsdocExec} ${sourcePath}`,
                 `--configure ${configFile}`,
-                `-d ${destPath}`,
+                `-d ${outputPath}`,
                 `-t ${modulesPath}/docdash`
             ];
 
@@ -73,23 +73,27 @@ class API {
                 cmd.push(`--readme ${sourcePath}/README.md`);
             }
 
-            log(cmd.join(' '));
+            cmd = cmd.join(' ');
+            log('[jsdoc] run:\n', cmd);
 
-            // const res = Helper.shellCmd(cmd.join(' '), null);
-            //
-            // if (res.indexOf('error') > -1) {
-            //     log('[jsdoc.error]'.red);
-            //     log(res);
-            // } else {
-            //     // copy custom styles/scripts
-            //     Helper.shellCmd([
-            //         `cp -r ${layoutPath}/scripts/* ${destPath}/scripts/`,
-            //         `cp -r ${layoutPath}/styles/* ${destPath}/styles/`
-            //     ].join(' && '));
-            // }
+            const res = Helper.shellCmd(cmd, null, true);
 
+            if (res.indexOf('error') > -1) {
+                log('[jsdoc.error]'.red);
+                log(res);
+            } else {
+                // copy custom styles/scripts
+                Helper.shellCmd([
+                    `cp -r ${layoutPath}/scripts/* ${destPath}/scripts/`,
+                    `cp -r ${layoutPath}/styles/* ${destPath}/styles/`
+                ].join(' && '));
+                log('\n[jsdoc] generated!');
+            }
         });
 
+        if (typeof callback === 'function') {
+            callback();
+        }
     }
 
 
