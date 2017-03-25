@@ -1,9 +1,9 @@
 {
   "name": "jsdoc-generator",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Generate jsdoc for your js files",
   "scripts": {
-    "postinstall": "node ./init.js"
+
   },
   "bin": {
     "jsdoc-generator": "./index.js"
