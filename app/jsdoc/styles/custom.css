@@ -4,8 +4,8 @@ table tbody tr:nth-child(even) {
     background-color: #eee;
 }
 
-table.params.th-border th {
-    border: 1px solid #ccc;
+table.params.th-border th, table.params.th-border td {
+    border: 2px solid #ccc;
 }
 
 /**

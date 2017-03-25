@@ -85,10 +85,14 @@ class API {
                 log(res);
             } else {
                 // copy custom styles/scripts
-                Helper.shellCmd([
-                    `cp -r ${layoutPath}/scripts/* ${destPath}/scripts/`,
-                    `cp -r ${layoutPath}/styles/* ${destPath}/styles/`
-                ].join(' && '));
+                const assetsCmd = [
+                    `cp -r ${layoutPath}/scripts/* ${outputPath}/scripts/`,
+                    `cp -r ${layoutPath}/styles/* ${outputPath}/styles/`
+                ].join(' && ');
+                log(assetsCmd);
+                let assets = Helper.shellCmd(assetsCmd);
+                log(assets);
+
                 log('\n[jsdoc] generated!');
             }
         });
