@@ -48,7 +48,8 @@ class API {
         const destPath = this._DEST_PATH;
         const layoutPath = this._LAYOUT_PATH;
         const modulesPath = config.dir.base + '/node_modules';
-        const jsdocExec = Helper.getNodeBin('jsdoc', modulesPath);
+        const npmBin = Helper.shellCmd('npm bin', config.dir.base);
+        const jsdocExec = `${npmBin}/jsdoc`;
 
         this._DOC_PATHS.forEach(function(info){
             const sourcePath = info.source;
