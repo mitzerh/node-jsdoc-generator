@@ -3,6 +3,8 @@
 
 const config = require('./config');
 const Helper = require(config.dir.app + '/helper');
+const npmRun = require('npm-run');
+const npmPath = require('npm-path');
 const _ = require('lodash');
 const log = console.log;
 
@@ -47,9 +49,8 @@ class API {
         const configFile = this._CONFIG_FILE;
         const destPath = this._DEST_PATH;
         const layoutPath = this._LAYOUT_PATH;
-        const modulesPath = config.dir.base + '/node_modules';
-        const npmBin = Helper.shellCmd('npm bin', config.dir.base);
-        const jsdocExec = `${npmBin}/jsdoc`;
+        const jsdocPath = Helper.getBinPath('jsdoc');
+        const docDashPath = Helper.getBinPath('docdash', true);
 
         this._DOC_PATHS.forEach(function(info){
             const sourcePath = info.source;
@@ -61,10 +62,10 @@ class API {
             }
 
             let cmd = [
-                `${jsdocExec} ${sourcePath}`,
+                `jsdoc ${sourcePath}`,
                 `--configure ${configFile}`,
                 `-d ${outputPath}`,
-                `-t ${modulesPath}/docdash`
+                `-t ${docDashPath}`
             ];
 
             // if there's a readme
@@ -77,7 +78,7 @@ class API {
             cmd = cmd.join(' ');
             log('[jsdoc] run:\n', cmd);
 
-            const res = Helper.shellCmd(cmd, null, true);
+            const res = npmRun.sync(cmd);
 
             if (res.indexOf('error') > -1) {
                 log('[jsdoc.error]'.red);
