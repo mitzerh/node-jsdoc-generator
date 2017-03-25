@@ -1,8 +1,8 @@
 /*eslint-env es6, node */
 'use strict';
 
-const config = require('app/config');
-const Helper = require('app/helper');
+const config = require('./config');
+const Helper = require(config.dir.app + '/helper');
 const _ = require('lodash');
 const log = console.log;
 
