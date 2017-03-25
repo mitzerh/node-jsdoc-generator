@@ -4,6 +4,10 @@ table tbody tr:nth-child(even) {
     background-color: #eee;
 }
 
+table.params.th-border th {
+    border: 1px solid #ccc;
+}
+
 /**
  * readme files
  */

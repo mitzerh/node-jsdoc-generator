@@ -17,9 +17,10 @@
             }
         }
 
-        $('#main > section.readme:first table').each(function(){
-            $(this).addClass('params');
+        $('#main > section.readme:first table, .description table').each(function(){
+            $(this).addClass('params th-border');
         });
+
     });
 
 }(jQuery));
