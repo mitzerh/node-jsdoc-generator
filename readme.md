@@ -16,6 +16,7 @@ npm install --save jsdoc-generator
 const Generator = require('jsdoc-generator');
 
 const config = {
+	silent: true,
 	dest: '/path/to/output/folder',
     paths: [{
 		name: 'my-app',
@@ -36,6 +37,7 @@ mydocs.generate();
 | Property | Type | Description |
 |:---------|:-----|:------------|
 | **dest** | String | Destination output directory |
+| **silent** | Boolean | Output or suppress logs (default: **false**) |
 | **paths** | Array | List of source paths where you want **jsdoc** to run |
 | **paths[].name** | String | The custom folder name of your documentation |
 | **paths[].source** | String | The source path of the documentation |

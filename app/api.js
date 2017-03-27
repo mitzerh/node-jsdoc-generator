@@ -18,6 +18,7 @@ class API {
         this._DEST_PATH = props.dest;
         this._DOC_PATHS = props.paths;
         this._LAYOUT_PATH = props.layout || config.dir.jsdoc;
+        this._SILENT = props.silent || false;
 
         // load default json
         this._CONF_JSON = JSON.parse(Helper.readFile(config.dir.app + '/jsdoc.json'));
@@ -81,23 +82,28 @@ class API {
             cmd = cmd.join(' ');
             log('[jsdoc] run:\n', cmd);
 
-            const res = npmRun.sync(cmd);
+            npmRun.exec(cmd, null, function (err, stdout, stderr) {
+                if (err) {
+                    log('[jsdoc.error]'.red);
+                    log(err);
+                    process.exit(1);
+                }
 
-            if (res.indexOf('error') > -1) {
-                log('[jsdoc.error]'.red);
-                log(res);
-            } else {
+                if (!self._SILENT) {
+                    log(stdout);
+                }
+
                 // copy custom styles/scripts
                 const assetsCmd = [
                     `cp -r ${layoutPath}/scripts/* ${outputPath}/scripts/`,
                     `cp -r ${layoutPath}/styles/* ${outputPath}/styles/`
                 ].join(' && ');
-                log(assetsCmd);
-                let assets = Helper.shellCmd(assetsCmd);
-                log(assets);
+                Helper.shellCmd(assetsCmd);
 
                 log('\n[jsdoc] generated!');
-            }
+
+            });
+
         });
 
         if (typeof callback === 'function') {
