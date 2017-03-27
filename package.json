@@ -1,6 +1,6 @@
 {
   "name": "jsdoc-generator",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Generate jsdoc for your js files",
   "scripts": {},
   "bin": {
@@ -27,7 +27,7 @@
     "cli-helper": "^0.1.0",
     "colors": "^1.1.2",
     "docdash": "^0.4.0",
-    "jsdoc": "^3.4.3",
+    "jsdoc": "git+https://github.com/jsdoc3/jsdoc.git",
     "lodash": "^4.17.4",
     "npm-path": "^2.0.3",
     "npm-run": "^4.1.2"
