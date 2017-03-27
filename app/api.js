@@ -63,7 +63,7 @@ class API {
             }
 
             let cmd = [
-                `jsdoc ${sourcePath}`,
+                `${jsdocPath} ${sourcePath}`,
                 `--configure ${configFile}`,
                 `-d ${outputPath}`
             ];
