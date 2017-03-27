@@ -3,10 +3,10 @@
     var nav = $('nav'),
         classes = nav.find('> h3:contains(Classes):first');
 
-    if (classes.length > 0) {
-        classes.hide();
-        classes.next('ul').hide();
-    }
+    // if (classes.length > 0) {
+    //     classes.hide();
+    //     classes.next('ul').hide();
+    // }
 
     $(document).ready(function(){
         var hash = window.location.hash;
