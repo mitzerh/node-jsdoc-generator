@@ -64,9 +64,12 @@ class API {
             let cmd = [
                 `jsdoc ${sourcePath}`,
                 `--configure ${configFile}`,
-                `-d ${outputPath}`,
-                `-t ${docDashPath}`
+                `-d ${outputPath}`
             ];
+
+            if (docDashPath) {
+                cmd.push(`-t ${docDashPath}`);
+            }
 
             // if there's a readme
             if (Helper.isFileExists(`${sourcePath}/readme.md`)) {
