@@ -38,8 +38,13 @@ class Helper extends CLI_Helper {
                     res = path;
                     break;
                 }
-            } else if (self.isFileExists(path)) {
-                res = path;
+            } else {
+                if (self.isFileExists(path)) {
+                    res = path;
+                } else if (self.isFileExists(`${item}/.bin/${command}`)) {
+                    res = `${item}/.bin/${command}`;
+                }
+
                 break;
             }
 

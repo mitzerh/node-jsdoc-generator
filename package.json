@@ -1,6 +1,6 @@
 {
   "name": "jsdoc-generator",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Generate jsdoc for your js files",
   "scripts": {},
   "bin": {
